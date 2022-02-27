@@ -1,0 +1,18 @@
+services:
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab.home.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.home.com'
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '3100:80'
+      - '3101:443'
+      - '3102:22'
+    volumes:
+      - './storage/config:/etc/gitlab'
+      - './storage/logs:/var/log/gitlab'
+      - './storage/data:/var/opt/gitlab'
+    shm_size: '256m'
